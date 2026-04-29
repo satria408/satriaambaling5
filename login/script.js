@@ -1,8 +1,7 @@
-// Clean Banking Login Form JavaScript
 class CleanBankingLoginForm {
     constructor() {
         this.form = document.getElementById('loginForm');
-        this.emailInput = document.getElementById('email');
+        this.usernameInput = document.getElementById('username');
         this.passwordInput = document.getElementById('password');
         this.passwordToggle = document.getElementById('passwordToggle');
         this.submitButton = this.form.querySelector('.login-btn');
@@ -18,9 +17,9 @@ class CleanBankingLoginForm {
     
     bindEvents() {
         this.form.addEventListener('submit', (e) => this.handleSubmit(e));
-        this.emailInput.addEventListener('blur', () => this.validateEmail());
+        this.usernameInput.addEventListener('blur', () => this.validateUsername());
         this.passwordInput.addEventListener('blur', () => this.validatePassword());
-        this.emailInput.addEventListener('input', () => this.clearError('email'));
+        this.usernameInput.addEventListener('input', () => this.clearError('username'));
         this.passwordInput.addEventListener('input', () => this.clearError('password'));
     }
     
@@ -28,26 +27,25 @@ class CleanBankingLoginForm {
         this.passwordToggle.addEventListener('click', () => {
             const type = this.passwordInput.type === 'password' ? 'text' : 'password';
             this.passwordInput.type = type;
-            
             this.passwordToggle.classList.toggle('show-password', type === 'text');
         });
     }
     
-    validateEmail() {
-        const email = this.emailInput.value.trim();
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // ✅ GANTI EMAIL JADI USERNAME
+    validateUsername() {
+        const username = this.usernameInput.value.trim();
         
-        if (!email) {
-            this.showError('email', 'Email address is required');
+        if (!username) {
+            this.showError('username', 'Username is required');
             return false;
         }
         
-        if (!emailRegex.test(email)) {
-            this.showError('email', 'Please enter a valid email address');
+        if (username.length < 3) {
+            this.showError('username', 'Username minimal 3 karakter');
             return false;
         }
         
-        this.clearError('email');
+        this.clearError('username');
         return true;
     }
     
@@ -59,8 +57,8 @@ class CleanBankingLoginForm {
             return false;
         }
         
-        if (password.length < 8) {
-            this.showError('password', 'Password must be at least 8 characters long');
+        if (password.length < 6) {
+            this.showError('password', 'Password minimal 6 karakter');
             return false;
         }
         
@@ -83,6 +81,7 @@ class CleanBankingLoginForm {
         
         formGroup.classList.remove('error');
         errorElement.classList.remove('show');
+        
         setTimeout(() => {
             errorElement.textContent = '';
         }, 200);
@@ -91,23 +90,20 @@ class CleanBankingLoginForm {
     async handleSubmit(e) {
         e.preventDefault();
         
-        const isEmailValid = this.validateEmail();
+        const isUsernameValid = this.validateUsername();
         const isPasswordValid = this.validatePassword();
         
-        if (!isEmailValid || !isPasswordValid) {
+        if (!isUsernameValid || !isPasswordValid) {
             return;
         }
         
         this.setLoading(true);
         
         try {
-            // Simulate secure authentication
-            await new Promise(resolve => setTimeout(resolve, 2200));
-            
-            // Show success
+            await new Promise(resolve => setTimeout(resolve, 1500));
             this.showSuccess();
         } catch (error) {
-            this.showError('password', 'Authentication failed. Please verify your credentials.');
+            this.showError('password', 'Login gagal!');
         } finally {
             this.setLoading(false);
         }
@@ -119,28 +115,28 @@ class CleanBankingLoginForm {
     }
     
     showSuccess() {
-        // Hide form with smooth transition
         this.form.style.transform = 'scale(0.95)';
         this.form.style.opacity = '0';
         
         setTimeout(() => {
             this.form.style.display = 'none';
-            document.querySelector('.security-notice').style.display = 'none';
             
-            // Show success message
             this.successMessage.classList.add('show');
-            
         }, 300);
         
-        // Redirect after success display
+        // ✅ REDIRECT FIX
         setTimeout(() => {
-            console.log('Redirecting to secure dashboard...');
-            // window.location.href = '/dashboard';
-        }, 2500);
+            let halaman = sessionStorage.getItem("halamanSebelumnya");
+            
+            if (halaman && halaman !== "") {
+                window.location.href = halaman;
+            } else {
+                window.location.href = "index.html"; // landing page
+            }
+        }, 2000);
     }
 }
 
-// Initialize the form when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     new CleanBankingLoginForm();
 });
