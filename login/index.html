@@ -22,8 +22,8 @@
             
             <form class="login-form" id="loginForm" novalidate>
                 <div class="form-group">
-                    <label for="Username">Username</label>
-                    <input type="Username" id="username" name="username" required autocomplete="username">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required autocomplete="username">
                     <span class="error-message" id="usernameError"></span>
                 </div>
 
@@ -59,7 +59,7 @@
     <script>
     // HANDLE LOGIN + REDIRECT
     document.getElementById("loginForm").addEventListener("submit", function(e) {
-        e.preventDefault(); // ⛔ stop reload
+        e.preventDefault();
 
         let username = document.getElementById("username").value;
         let password = document.getElementById("password").value;
@@ -69,13 +69,10 @@
             return;
         }
 
-        // tampilkan pesan sukses
         document.getElementById("successMessage").style.display = "block";
 
-        // ambil halaman sebelumnya
         let halaman = sessionStorage.getItem("halamanSebelumnya");
 
-        // redirect setelah 1.5 detik
         setTimeout(() => {
             if (halaman) {
                 window.location.href = halaman;
