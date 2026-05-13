@@ -72,6 +72,13 @@
                Login
             </a>
 
+            <!-- TOMBOL LOGOUT -->
+            <a href="login/index.html"
+               class="btn btn-danger ms-lg-3"
+               onclick="logout()">
+               Logout
+            </a>
+
         </div>
     </div>
 </nav>
@@ -170,6 +177,15 @@
 
 <script>
     AOS.init();
+
+    function logout() {
+
+        // hapus status login
+        localStorage.removeItem("isLogin");
+
+        // kembali ke halaman login
+        window.location.href = "login/index.html";
+    }
 </script>
 
 </body>
