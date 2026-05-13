@@ -50,9 +50,17 @@ document.addEventListener("DOMContentLoaded", function() {
         // tampilkan pesan sukses
         document.getElementById("successMessage").style.display = "block";
 
-        // redirect ke halaman utama
+        // redirect ke landing page sebelumnya
         setTimeout(function() {
-            window.location.href = "index.html";
+
+            let halaman = sessionStorage.getItem("halamanSebelumnya");
+
+            if (halaman) {
+                window.location.href = halaman;
+            } else {
+                window.location.href = "../index.html";
+            }
+
         }, 1500);
 
     });
