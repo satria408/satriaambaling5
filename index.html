@@ -67,9 +67,8 @@
             </ul>
 
             <!-- TOMBOL LOGIN -->
-            <a href="login/index.html" 
-               class="btn btn-primary ms-lg-3"
-               onclick="simpanHalaman()">
+            <a href="login/index.html"
+               class="btn btn-primary ms-lg-3">
                Login
             </a>
 
@@ -171,22 +170,6 @@
 
 <script>
     AOS.init();
-
-    // SIMPAN HALAMAN SEBELUM LOGIN
-    function simpanHalaman() {
-        sessionStorage.setItem("halamanSebelumnya", window.location.href);
-    }
-
-    // KEMBALI KE LANDING PAGE SETELAH LOGIN
-    function kembaliKeLandingPage() {
-        let halaman = sessionStorage.getItem("halamanSebelumnya");
-
-        if (halaman) {
-            window.location.href = halaman;
-        } else {
-            window.location.href = "../index.html";
-        }
-    }
 </script>
 
 </body>
