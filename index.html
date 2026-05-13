@@ -67,11 +67,10 @@
             </ul>
 
             <!-- TOMBOL LOGOUT -->
-            <a href="login/index.html"
-               class="btn btn-danger ms-lg-3"
-               onclick="logout()">
-               Logout
-            </a>
+            <button class="btn btn-danger ms-lg-3"
+                    onclick="logout()">
+                Logout
+            </button>
 
         </div>
     </div>
@@ -177,7 +176,7 @@
         // hapus status login
         localStorage.removeItem("isLogin");
 
-        // kembali ke halaman login
+        // pindah ke halaman login
         window.location.href = "login/index.html";
     }
 </script>
