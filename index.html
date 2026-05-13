@@ -23,6 +23,7 @@
 
 <main>
 
+<!-- HERO -->
 <section class="hero" id="hero">
     <div class="heroText">
         <h1 class="text-white mt-5 mb-lg-4" data-aos="zoom-in" data-aos-delay="800">
@@ -43,6 +44,7 @@
     <div class="overlay"></div>
 </section>
 
+<!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg bg-light shadow-lg">
     <div class="container">
         <a class="navbar-brand" href="index.html">
@@ -55,6 +57,7 @@
 
         <div class="collapse navbar-collapse" id="navbarNav">
             
+            <!-- MENU -->
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item"><a class="nav-link active" href="#hero">Menu Utama</a></li>
                 <li class="nav-item"><a class="nav-link" href="#about">Our Studio</a></li>
@@ -70,6 +73,7 @@
     </div>
 </nav>
 
+<!-- ABOUT -->
 <section class="section-padding pb-0" id="about">
     <div class="container mb-5 pb-lg-5">
         <div class="row">
@@ -86,6 +90,69 @@
             </div>
         </div>
     </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 col-12 p-0">      
+                <img src="images/elena-rabkina-eVVzwsNhNf4-unsplash.jpg" class="img-fluid">
+            </div>
+
+            <div class="col-lg-3 col-12 bg-dark text-white d-flex align-items-center p-4">
+                <div>
+                    <h3>We’re creative</h3>
+                    <p>Over six years in business</p>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-12 p-0">
+                <img src="images/people/working-business-lady.jpg" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="section-padding" id="portfolio">
+    <div class="container">
+        <h2 class="text-center mb-5">Portfolio</h2>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <img src="images/portfolio/visuals-Y4qzW3AsvqI-unsplash.jpeg" class="img-fluid mb-3">
+                <img src="images/portfolio/severin-candrian-nn3uIZqmUtE-unsplash.jpeg" class="img-fluid">
+            </div>
+
+            <div class="col-lg-6">
+                <img src="images/portfolio/tyler-nix-Y1drF0Y3Oe0-unsplash.jpeg" class="img-fluid mb-3">
+                <img src="images/portfolio/thought-catalog-gv-T-OjLe4c-unsplash.jpeg" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- NEWS -->
+<section class="section-padding" id="news">
+    <div class="container">
+        <h2 class="text-center mb-5">News & Events</h2>
+
+        <img src="images/news/caroline-lm-uqveD8dYPUM-unsplash.jpg" class="img-fluid mb-3">
+        <img src="images/news/jean-philippe-delberghe-MmanXAs1sKw-unsplash.jpeg" class="img-fluid mb-3">
+        <img src="images/news/maria-stewart-p4tj0g-_aMM-unsplash.jpeg" class="img-fluid">
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section-padding" id="contact">
+    <div class="container">
+        <h2 class="text-center">Contact</h2>
+
+        <form>
+            <input type="text" placeholder="Nama" class="form-control mb-3">
+            <input type="email" placeholder="Email" class="form-control mb-3">
+            <textarea placeholder="Pesan" class="form-control mb-3"></textarea>
+            <button class="btn btn-primary w-100">Kirim</button>
+        </form>
+    </div>
 </section>
 
 </main>
@@ -94,6 +161,7 @@
     <p>© 2026 Web Satria</p>
 </footer>
 
+<!-- JS -->
 <script src="js/bootstrap.bundle.min.js"></script>
 <script src="js/aos.js"></script>
 
@@ -102,9 +170,15 @@
 
     const authButton = document.getElementById("authButton");
 
-    // cek login
+    // kalau belum ada status login
+    if (localStorage.getItem("isLogin") === null) {
+        localStorage.setItem("isLogin", "false");
+    }
+
+    // cek status login
     if (localStorage.getItem("isLogin") === "true") {
 
+        // tampilkan tombol logout
         authButton.innerHTML = `
             <button class="btn btn-danger ms-lg-3" onclick="logout()">
                 Logout
@@ -113,6 +187,7 @@
 
     } else {
 
+        // tampilkan tombol login
         authButton.innerHTML = `
             <a href="login/index.html" class="btn btn-primary ms-lg-3">
                 Login
@@ -120,10 +195,13 @@
         `;
     }
 
+    // fungsi logout
     function logout() {
 
-        localStorage.removeItem("isLogin");
+        // ubah status login jadi false
+        localStorage.setItem("isLogin", "false");
 
+        // refresh halaman
         window.location.reload();
     }
 </script>
