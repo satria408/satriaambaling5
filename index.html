@@ -66,8 +66,12 @@
                 <li class="nav-item"><a class="nav-link" href="#contact">Contact Us</a></li>
             </ul>
 
-            <!-- TOMBOL LOGIN (SUDAH DIPERBAIKI) -->
-            <a href="login/index.html" class="nav-link" onclick="simpanHalaman()">Login</a>
+            <!-- TOMBOL LOGIN -->
+            <a href="login/index.html" 
+               class="btn btn-primary ms-lg-3"
+               onclick="simpanHalaman()">
+               Login
+            </a>
 
         </div>
     </div>
@@ -171,6 +175,17 @@
     // SIMPAN HALAMAN SEBELUM LOGIN
     function simpanHalaman() {
         sessionStorage.setItem("halamanSebelumnya", window.location.href);
+    }
+
+    // KEMBALI KE LANDING PAGE SETELAH LOGIN
+    function kembaliKeLandingPage() {
+        let halaman = sessionStorage.getItem("halamanSebelumnya");
+
+        if (halaman) {
+            window.location.href = halaman;
+        } else {
+            window.location.href = "../index.html";
+        }
     }
 </script>
 
