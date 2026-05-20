@@ -13,6 +13,11 @@
         <h1>Web Satria</h1>
         <p>Silahkan Login</p>
 
+        <!-- TULISAN HALO USERNAME -->
+        <h2 id="welcomeText" style="display:none;">
+            Halo <span id="displayUsername"></span>
+        </h2>
+
         <form id="loginForm">
             <div class="form-group">
                 <input type="text" id="username" placeholder="Username">
@@ -81,6 +86,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
             // simpan status login
             localStorage.setItem("isLogin", "true");
+
+            // tampilkan halo username
+            document.getElementById("welcomeText").style.display = "block";
+            document.getElementById("displayUsername").innerText = username;
 
             // tampilkan pesan sukses
             document.getElementById("successMessage").style.display = "block";
