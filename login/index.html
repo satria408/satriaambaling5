@@ -42,6 +42,10 @@ document.addEventListener("DOMContentLoaded", function() {
     const form = document.getElementById("loginForm");
     const signupBtn = document.getElementById("signupBtn");
 
+    // AKUN DEFAULT
+    const defaultUsername = "heri";
+    const defaultPassword = "123";
+
     // SIGN UP
     signupBtn.addEventListener("click", function() {
 
@@ -70,7 +74,10 @@ document.addEventListener("DOMContentLoaded", function() {
         let savedPassword = localStorage.getItem("password");
 
         // LOGIN BERHASIL
-        if (username === savedUsername && password === savedPassword) {
+        if (
+            (username === defaultUsername && password === defaultPassword) ||
+            (username === savedUsername && password === savedPassword)
+        ) {
 
             // simpan status login
             localStorage.setItem("isLogin", "true");
