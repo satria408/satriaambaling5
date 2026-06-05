@@ -10,27 +10,30 @@
 
 <div class="login-container">
     <div class="login-card">
-        <h1>Web Satria</h1>
-        <p>Silahkan Login</p>
 
-        <!-- TULISAN HALO USERNAME -->
+        <div class="login-header">
+            <h1>Web Satria</h1>
+            <p>Silahkan Login</p>
+        </div>
+
         <h2 id="welcomeText" style="display:none;">
             Halo <span id="displayUsername"></span>
         </h2>
 
         <form id="loginForm">
             <div class="form-group">
-                <input type="text" id="username" placeholder="Username">
+                <input type="text" id="username" placeholder="Username" required>
             </div>
 
             <div class="form-group">
-                <input type="password" id="password" placeholder="Password">
+                <input type="password" id="password" placeholder="Password" required>
             </div>
 
-            <button type="submit">Login</button>
+            <button type="submit" class="login-btn">
+                Login
+            </button>
 
-            <!-- TOMBOL SIGN UP -->
-            <button type="button" id="signupBtn">
+            <button type="button" id="signupBtn" class="login-btn">
                 Sign Up
             </button>
         </form>
@@ -38,6 +41,7 @@
         <div id="successMessage" style="display:none; margin-top:10px;">
             Login berhasil... redirecting
         </div>
+
     </div>
 </div>
 
@@ -47,19 +51,15 @@ document.addEventListener("DOMContentLoaded", function() {
     const form = document.getElementById("loginForm");
     const signupBtn = document.getElementById("signupBtn");
 
-    // AKUN DEFAULT
     const defaultUsername = "heri";
     const defaultPassword = "123";
 
-    // SIGN UP
     signupBtn.addEventListener("click", function() {
 
         let newUsername = prompt("Buat Username:");
         let newPassword = prompt("Buat Password:");
 
         if (newUsername && newPassword) {
-
-            // simpan akun baru
             localStorage.setItem("username", newUsername);
             localStorage.setItem("password", newPassword);
 
@@ -67,49 +67,39 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // LOGIN
     form.addEventListener("submit", function(e) {
         e.preventDefault();
 
         let username = document.getElementById("username").value.trim();
         let password = document.getElementById("password").value.trim();
 
-        // ambil akun tersimpan
         let savedUsername = localStorage.getItem("username");
         let savedPassword = localStorage.getItem("password");
 
-        // LOGIN BERHASIL
         if (
             (username === defaultUsername && password === defaultPassword) ||
             (username === savedUsername && password === savedPassword)
         ) {
 
-            // simpan status login
             localStorage.setItem("isLogin", "true");
 
-            // tampilkan halo username
             document.getElementById("welcomeText").style.display = "block";
             document.getElementById("displayUsername").innerText = username;
 
-            // tampilkan pesan sukses
             document.getElementById("successMessage").style.display = "block";
 
-            // redirect ke halaman utama
             setTimeout(function() {
                 window.location.href = "../index.html";
             }, 1500);
 
-        } 
-        
-        // LOGIN GAGAL
-        else {
+        } else {
             alert("Username atau Password salah!");
         }
-
     });
 
 });
 </script>
 
 </body>
-</html>
+</html> 
+    
